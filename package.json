@@ -1,0 +1,8 @@
+{
+  "name": "ep_mathjax",
+  "description": "Show LaTeX STylee Math formulas powered by Mathjax",
+  "version": "0.0.1",
+  "author": "johnyma22 (John McLear) <john@mclear.co.uk>",
+  "dependencies": { },
+  "engines": { "node": "*" }
+}

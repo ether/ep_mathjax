@@ -1,0 +1,18 @@
+{
+  "parts": [
+    {
+      "name": "mathjax",
+      "hooks": {
+	"eejsBlock_editbarMenuLeft": "ep_mathjax/hooks:eejsBlock_editbarMenuLeft",
+	"eejsBlock_scripts": "ep_mathjax/hooks:eejsBlock_scripts",
+	"eejsBlock_styles": "ep_mathjax/hooks:eejsBlock_styles",
+	"eejsBlock_body": "ep_mathjax/hooks:eejsBlock_body"
+      },
+      "client_hooks": {
+        "aceInitInnerdocbodyHead": "ep_mathjax/static/js/hooks:aceInitInnerdocbodyHead",
+        "aceAttribsToClasses": "ep_mathjax/static/js/hooks:aceAttribsToClasses",
+        "aceCreateDomLine": "ep_mathjax/static/js/hooks:aceCreateDomLine"
+      }
+    }
+  ]
+}
