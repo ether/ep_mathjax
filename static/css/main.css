@@ -1,4 +1,4 @@
-#embedMediaModal {
+#mathjaxModal {
   position: absolute;
   top: 55px;
   right: 20px;
@@ -6,13 +6,13 @@
   z-index:999999;
 }
 
-.buttonicon-embed-media { background: url(/static/plugins/ep_embedmedia/static/html/editbar_icon.png) !important; }
+.buttonicon-mathjax { background: url(/static/plugins/ep_mathjax/static/html/editbar_icon.png) !important; }
 
-.embedMediaButton {
+.mathjaxButton {
   padding:10px;
 }
 
-#cancelEmbedMedia{
+#cancelmathjax{
   color:red;
 } 
 

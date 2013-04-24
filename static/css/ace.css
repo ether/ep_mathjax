@@ -1,18 +1,18 @@
-.embedMedia {
+.mathjax {
   border: 2px solid #bbbbbb;
   margin: 2px;
   display: inline-block;
   line-height: 0;
 }
 
-.embedMedia .media {
+.mathjax .media {
 }
 
-.embedMedia .media iframe {
+.mathjax .media iframe {
   position: inherit;
 }
 
-.embedMedia .character {
+.mathjax .character {
   /* Do not use display: none, or you'll break backspace for some reason! */
   font-size: 0;
   opacity: 0;

@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  $("#insertEmbedMedia").click(function () {
+  $("#insertmathjax").click(function () {
     // Can not use this yet, fix in main etherpad
-    // padeditbar.toogleDropDown("embedMediaModal");
+    // padeditbar.toogleDropDown("mathjaxModal");
 
-    var module = $("#embedMediaModal");
+    var module = $("#mathjaxModal");
 
     if (module.css('display') != "none") {
       module.slideUp("fast");
@@ -12,20 +12,20 @@ $(document).ready(function () {
     }
   });
 
-  $("#doEmbedMedia").click(function () {
+  $("#domathjax").click(function () {
     var padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
 
-    $("#embedMediaModal").slideUp("fast");
+    $("#mathjaxModal").slideUp("fast");
 
     return padeditor.ace.callWithAce(function (ace) {
       rep = ace.ace_getRep();
       ace.ace_replaceRange(rep.selStart, rep.selEnd, "E");
       ace.ace_performSelectionChange([rep.selStart[0],rep.selStart[1]-1], rep.selStart, false);
-        ace.ace_performDocumentApplyAttributesToRange(rep.selStart, rep.selEnd, [["embedMedia", escape($("#embedMediaSrc")[0].value)]]);
-    }, "embedMedia");
+        ace.ace_performDocumentApplyAttributesToRange(rep.selStart, rep.selEnd, [["mathjax", escape($("#mathjaxSrc")[0].value)]]);
+    }, "mathjax");
   });
 
-  $("#cancelEmbedMedia").click(function () {
-    $("#embedMediaModal").slideUp("fast");
+  $("#cancelmathjax").click(function () {
+    $("#mathjaxModal").slideUp("fast");
   });
 });
