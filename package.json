@@ -1,7 +1,7 @@
 {
   "name": "ep_mathjax",
   "description": "Show LaTeX STylee Math formulas powered by Mathjax",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "johnyma22",
     "email": "john@mclear.co.uk",
