@@ -4,13 +4,14 @@ $(document).ready(function () {
     // Not clicking on an existing latex so no lineNumber
     clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
 
-    // Can not use this yet, fix in main etherpad
+    // bit of a hacky way but works fine
     var module = $("#mathjaxModal");
 
     if (module.css('display') != "none") {
       module.slideUp("fast");
     } else {
       module.slideDown("fast");
+      $('#mathjaxSrc').val("");  // clear input
       redraw();
     }
   });
