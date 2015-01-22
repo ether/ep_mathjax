@@ -1,5 +1,9 @@
 $(document).ready(function () {
   $("#insertEmbedMathjax").click(function () {
+
+    // Not clicking on an existing latex so no lineNumber
+    clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
+
     // Can not use this yet, fix in main etherpad
     var module = $("#mathjaxModal");
 
@@ -28,21 +32,6 @@ $(document).ready(function () {
     $('#mathjaxSrc').val($('#mathjaxSrc').val() + title);
     $('#mathjaxSrc').change();
   })
-
-  $("#doMathjax").click(function () {
-    var padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
-
-    $("#mathjaxModal").slideUp("fast");
-
-    return padeditor.ace.callWithAce(function (ace) {
-      rep = ace.ace_getRep();
-      ace.ace_replaceRange(rep.selStart, rep.selEnd, "E");
-      ace.ace_performSelectionChange([rep.selStart[0],rep.selStart[1]-1], rep.selStart, false);
-        var val = $("#mathjaxSrc").val();
-        var latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-        ace.ace_performDocumentApplyAttributesToRange(rep.selStart, rep.selEnd, [["mathjax", escape(latex)]]);
-    }, "mathjax");
-  });
 
   $("#cancelMathjax").click(function () {
     $("#mathjaxModal").slideUp("fast");
