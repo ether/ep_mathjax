@@ -1,4 +1,5 @@
 var collectContentPre = function(hook, context){
+
   var cls = context.cls;
   var tname = context.tname;
   var state = context.state; 
@@ -6,7 +7,10 @@ var collectContentPre = function(hook, context){
 
   var tagIndex = cls.indexOf("mathjax");
   if(tagIndex === 0){
-    lineAttributes['mathjax'] = tags[tagIndex];
+//    console.log(context);
+    var cls = cls.split(" ");
+//    console.log(cls[1]);
+    lineAttributes['mathjax'] = cls[1];
   }
 
   var tagIndex = cls.indexOf("mathjax");
