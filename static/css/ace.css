@@ -1,8 +1,9 @@
 .mathjax {
-  border: 2px solid #bbbbbb;
   margin: 2px;
   display: inline-block;
   line-height: 0;
+  background-color:#fff !important;
+  padding:2px;
 }
 
 .mathjax .media {

@@ -1,10 +1,10 @@
-# MathJax powered formulas in Etherpad
+# Latex formulas in Etherpad powered by CodeCog
 
-## How to use..
-Enable by clicking Settings Cog --> MathJax LaTeX or by appending ?mathjax=true to the pad URL
-Write MathJax style syntax and it will turn your dingdong into formulas
+Sadly Mathjax was unusable due to an issue that mathjax has to rewrite the contents in the DOM.  So an alternative was found and that's what we use!
 
-## TODO
-* Try to get funding for a few days work to get this done
-* Make it work
-* http://cdn.mathjax.org/mathjax/latest/test/sample-dynamic-2.html
+Enjoy.
+
+TODO:
+
+* Tests
+* Modify contents

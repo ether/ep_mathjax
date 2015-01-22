@@ -11,7 +11,9 @@
       "client_hooks": {
         "aceInitInnerdocbodyHead": "ep_mathjax/static/js/hooks:aceInitInnerdocbodyHead",
         "aceAttribsToClasses": "ep_mathjax/static/js/hooks:aceAttribsToClasses",
-        "aceCreateDomLine": "ep_mathjax/static/js/hooks:aceCreateDomLine"
+        "aceCreateDomLine": "ep_mathjax/static/js/hooks:aceCreateDomLine",
+	"postAceInit": "ep_mathjax/static/js/hooks:postAceInit",
+	"aceInitialized": "ep_mathjax/static/js/hooks:aceInitialized"
       }
     }
   ]

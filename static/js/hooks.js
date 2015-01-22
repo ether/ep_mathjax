@@ -1,10 +1,15 @@
+var underscore = require('ep_etherpad-lite/static/js/underscore');
+var padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
+var padEditor;
+
+exports.aceInitialized = function(hook, context){
+  var editorInfo = context.editorInfo;
+  editorInfo.ace_editMathjax = underscore(exports.editMathjax).bind(context); // What does underscore do here?
+  padEditor = context.editorInfo.editor;
+};
+
 exports.aceInitInnerdocbodyHead = function(hook_name, args, cb) {
   args.iframeHTML.push('<link rel="stylesheet" type="text/css" href="/static/plugins/ep_mathjax/static/css/ace.css"/>');
-  args.iframeHTML.push('<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>');
-//  args.iframeHTML.push('<script type="text/javascript"> MathJax.Hub.Register.StartupHook("TeX Jax Ready ", function () {top.console.log("MathJax enabled");} );</script>');
-  args.iframeHTML.push('<script type="text/javascript">MathJax.Hub.Startup.signal.Interest(function (m) {console.log(m)});</script>');
-  args.iframeHTML.push('<script type="text/javascript">MathJax.Hub.signal.Interest(function (message) {console.log("Hub: "+message)});</script>');
-
   return cb();
 };
 
@@ -17,7 +22,7 @@ exports.aceCreateDomLine = function(hook_name, args, cb) {
   if (args.cls.indexOf('mathjax:') >= 0) {
     var clss = [];
     var argClss = args.cls.split(" ");
-    var value;
+     var value;
 
     for (var i = 0; i < argClss.length; i++) {
       var cls = argClss[i];
@@ -27,13 +32,20 @@ exports.aceCreateDomLine = function(hook_name, args, cb) {
 	clss.push(cls);
       }
     }
-
-    return cb([{cls: clss.join(" "), extraOpenTags: "<math>" + unescape(value) + "</math><span class='character'>", extraCloseTags: "</span>"}]);
+    var img = "http://latex.codecogs.com/gif.latex?"+unescape(value);
+    return cb([{cls: clss.join(" "), extraOpenTags: "<span class='mathjax'><span class='Mathjax'><img src='" + img + "'></span><span class='character'>", extraCloseTags: '</span>'}]);
   }
 
   return cb();
 };
 
+exports.postAceInit = function(hook_name, context){
+  context.ace.callWithAce(function(ace){
+    var doc = ace.ace_getDocument();
+    var $inner = $(doc).find('#innerdocbody');
+    $inner.on("click", ".mathjax", underscore(exports.editMathjaxClick).bind(ace));
+  }, 'tasklist', true);
+};
 
 var wrap = function (obj) {
   var wrapper = $("<div></div>");
@@ -41,13 +53,23 @@ var wrap = function (obj) {
   return wrapper;
 }
 
-var filter = function (node) {
-  node = $(node);
-  if (node.children().length) {
-    node.children().each(function () { filter(this); });
-  }
-  if (!node.is("math")) {
-    node.replaceWith(node.children().clone());
-  }
+exports.editMathjax = function(lineNumber){
+  var ace = this;
+  var rep = this.rep;
+  var latex = this.documentAttributeManager.getAttributeOnLine(lineNumber, 'mathjax');
+  latex = unescape(latex.replace(/\&space;/g, ' ').replace(/\&plus;/g, '+').replace(/\&hash;/g, '#').replace(/\@plus;/g, '+').replace(/\@hash;/g, '#'));  
+  console.log("latex", latex);
+  $("#mathjaxModal").slideDown("fast");
+  $("#mathjaxSrc").val(latex);
+  $('#mathjaxSrc').change();
 }
 
+exports.editMathjaxClick = function(event){
+  console.log(event);
+  var target = event.target;
+  var parent = $(target).closest("div");
+  var lineNumber = parent.prevAll().length;
+  padEditor.callWithAce(function(ace){ // call the function to apply the attribute inside ACE
+    ace.ace_editMathjax(lineNumber);
+  }, 'tasklist', true); // TODO what's the second attribute do here?
+}
