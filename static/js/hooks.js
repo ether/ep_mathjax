@@ -37,7 +37,7 @@ exports.aceCreateDomLine = function(hook_name, args, cb) {
       }
     }
     var img = "http://latex.codecogs.com/gif.latex?"+unescape(value);
-    return cb([{cls: clss.join(" "), extraOpenTags: "<span class='mathjax'><img src='" + img + "'></span>", extraCloseTags: ''}]);
+    return cb([{cls: clss.join(" "), extraOpenTags: "<span class='mathjaxcontainer'><span class='mathjax'><img src='" + img + "'></span><span class='character'>", extraCloseTags: '</span></span>'}]);
   }
   return cb();
 };

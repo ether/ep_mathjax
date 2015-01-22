@@ -13,7 +13,7 @@
   position: inherit;
 }
 
-.mathjax .character {
+.mathjaxcontainer .character {
   /* Do not use display: none, or you'll break backspace for some reason! */
   font-size: 0;
   opacity: 0;

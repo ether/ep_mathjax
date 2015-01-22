@@ -6,14 +6,18 @@
 	"eejsBlock_editbarMenuLeft": "ep_mathjax/hooks:eejsBlock_editbarMenuLeft",
 	"eejsBlock_scripts": "ep_mathjax/hooks:eejsBlock_scripts",
 	"eejsBlock_styles": "ep_mathjax/hooks:eejsBlock_styles",
-	"eejsBlock_body": "ep_mathjax/hooks:eejsBlock_body"
+	"eejsBlock_body": "ep_mathjax/hooks:eejsBlock_body",
+        "collectContentPre": "ep_mathjax/static/js/shared",
+        "collectContentPost": "ep_mathjax/static/js/shared"
       },
       "client_hooks": {
         "aceInitInnerdocbodyHead": "ep_mathjax/static/js/hooks:aceInitInnerdocbodyHead",
         "aceAttribsToClasses": "ep_mathjax/static/js/hooks:aceAttribsToClasses",
         "aceCreateDomLine": "ep_mathjax/static/js/hooks:aceCreateDomLine",
 	"postAceInit": "ep_mathjax/static/js/hooks:postAceInit",
-	"aceInitialized": "ep_mathjax/static/js/hooks:aceInitialized"
+	"aceInitialized": "ep_mathjax/static/js/hooks:aceInitialized",
+        "collectContentPre": "ep_mathjax/static/js/shared",
+        "collectContentPost": "ep_mathjax/static/js/shared"
       }
     }
   ]
