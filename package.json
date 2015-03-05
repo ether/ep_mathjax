@@ -1,22 +1,19 @@
 {
   "name": "ep_mathjax",
   "description": "Show LaTeX STylee Math formulas powered by CodeCog NOT Mathjax",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": {
-    "name": "johnyma22",
+    "name": "John McLear",
     "email": "john@mclear.co.uk",
-    "url": "John McLear"
+    "url": "http://mclear.co.uk"
   },
   "dependencies": {},
   "engines": {
     "node": "*"
   },
-  "readme": "# MathJax powered formulas in Etherpad\n\n## How to use..\nEnable by clicking Settings Cog --> MathJax LaTeX or by appending ?mathjax=true to the pad URL\nWrite MathJax style syntax and it will turn your dingdong into formulas\n\n## TODO\n* Try to get funding for a few days work to get this done\n* Make it work\n* http://cdn.mathjax.org/mathjax/latest/test/sample-dynamic-2.html\n",
-  "readmeFilename": "README.md",
-  "_id": "ep_mathjax@0.0.1",
-  "dist": {
-    "shasum": "d94efabc215804e69d372372b08d84d9ee146624"
+  "repository" : { 
+    "type" : "git",
+    "url" : "http://github.com/johnmclear/ep_mathjax"
   },
-  "_from": "ep_mathjax@",
-  "_resolved": "https://registry.npmjs.org/ep_mathjax/-/ep_mathjax-0.0.1.tgz"
+  "readmeFilename": "README.md"
 }
