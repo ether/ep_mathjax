@@ -5,6 +5,8 @@ var collectContentPre = function(hook, context){
   var state = context.state; 
   var lineAttributes = state.lineAttributes
 
+  if(!cls) return; // required for import
+
   var tagIndex = cls.indexOf("mathjax");
   if(tagIndex === 0){
 //    console.log(context);
@@ -29,6 +31,8 @@ var collectContentPost = function(hook, context){
   var tname = context.tname;
   var state = context.state;
   var lineAttributes = state.lineAttributes
+
+  if(!cls) return; // required for import
 
   var tagIndex = cls.indexOf("mathjax");       
   if(tagIndex >= 0){
