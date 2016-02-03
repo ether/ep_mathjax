@@ -12,7 +12,7 @@ exports.aceInitialized = function(hook, context){
 
 // CSS styling of editor
 exports.aceInitInnerdocbodyHead = function(hook_name, args, cb) {
-  args.iframeHTML.push('<link rel="stylesheet" type="text/css" href="/static/plugins/ep_mathjax/static/css/ace.css"/>');
+  args.iframeHTML.push('<link rel="stylesheet" type="text/css" href="../static/plugins/ep_mathjax/static/css/ace.css"/>');
   return cb();
 };
 
