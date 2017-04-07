@@ -42,6 +42,6 @@ $(document).ready(function () {
 function redraw(){
   var val = $("#mathjaxSrc").val();
   var latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-  url = "http://latex.codecogs.com/gif.latex?"+latex;
+  url = "https://latex.codecogs.com/gif.latex?"+latex;
   $('#mathjaxPreviewImg').attr("src", url);
 }
