@@ -1,47 +1,7 @@
-#mathjaxModal {
-  position: absolute;
-  right: 20px;
-  display: none;
-  z-index:999999;
-  left:0px;
-  right:0px;
-  max-width:90%;
-  width:90%;
-
-}
-
-#mathjaxSrc {
-  width:90%;
-}
-
-#mathjaxWrite{
-  float:left;
-  width:50%;
-}
-
-#mathjaxPreview{
-  float:right;
-  width:50%;
-}
-
-#mathjaxPreviewImg{
-  margin-top:50px;
-}
-
-#mathjaxModal > textarea {
-  max-width:99%;
-}
-
-.buttonicon-embed-mathjax { 
-  font-size:24px;
-  margin-top:-10px;
-  line-height:24px;  
-}
-
-.mathjaxButton {
-  padding:10px;
-}
-
-#cancelmathjax{
-  color:red;
+.buttonicon-embed-mathjax{
+  text-transform: none;
+  font-weight:800;
+  font-size:22px !important;
+  font-family:monospace;
+  margin-top:-3px;
 }

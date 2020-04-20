@@ -1,7 +1,9 @@
 <div id="mathjaxModal" class="popup">
+  <div class="popup-content">
     <% e.begin_block("mathjaxPopup"); %>
+
         <div id=mathjaxWrite>
-            <h1>Mathjax into this pad</h1>
+            <p><h2>Mathjax into this pad</h2></p>
             <p>Write Mathjax here:</p>
 
                 <select id="mathsymbols" title="General LaTeX symbols">
@@ -92,10 +94,14 @@
                 <input type="button" class="mathjaxButton" id="doMathjax" value="Insert ">
                 <input type="button" class="mathjaxButton" id="cancelMathjax" value="Cancel">
             </div>
+
         </div>
+
+
         <div id=mathjaxPreview>
-            <h1>Mathjax preview</h1>
+            <h2>Mathjax preview</h2>
             <img id="mathjaxPreviewImg">
         </div>
     <% e.end_block(); %>
+  </div>
 </div>

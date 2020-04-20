@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  $("#insertEmbedMathjax").click(function () {
-
+  $(".ep_mathjax").click(function () {
+console.log("click");
     // Not clicking on an existing latex so no lineNumber
     clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
 
@@ -42,6 +42,6 @@ $(document).ready(function () {
 function redraw(){
   var val = $("#mathjaxSrc").val();
   var latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-  url = "https://latex.codecogs.com/gif.latex?"+latex;
+  url = window.location.protocol + "//latex.codecogs.com/gif.latex?" + latex;
   $('#mathjaxPreviewImg').attr("src", url);
 }
