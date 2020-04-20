@@ -2,9 +2,8 @@
   <div class="popup-content">
     <% e.begin_block("mathjaxPopup"); %>
 
-        <div id=mathjaxWrite>
+        <div id="mathjaxWrite">
             <p><h1>Insert Mathjax into this pad</h1></p>
-            <p>Write Mathjax here:</p>
 
                 <select id="mathsymbols" title="General LaTeX symbols">
                   <option title= "">Symbols</option>
@@ -41,7 +40,7 @@
                   <option title= "{\color{green} }">G</option>
                   <option title= "{\color{blue} }">B</option>
                 </select>
-                
+
                 <select id="greeksymbols" title="Greek characters">
                   <option title="">Greek</option>
                   <optgroup label= "Lowercase">
@@ -89,16 +88,16 @@
                   </optgroup>
                 </select>
 
-            <textarea id="mathjaxSrc" rows="10" cols="60"></textarea>
+            <textarea id="mathjaxSrc" rows="10" cols="60" placeholder="Write Mathjax here"></textarea>
             <div>
-                <input type="button" class="mathjaxButton" id="doMathjax" value="Insert ">
-                <input type="button" class="mathjaxButton" id="cancelMathjax" value="Cancel">
+                <input type="button" class="btn btn-primary mathjaxButton" id="doMathjax" value="Insert ">
+                <input type="button" class="btn btn-default mathjaxButton" id="cancelMathjax" value="Cancel">
             </div>
 
         </div>
 
 
-        <div id=mathjaxPreview>
+        <div id="mathjaxPreview">
             <h2>Mathjax preview</h2>
             <img id="mathjaxPreviewImg">
         </div>

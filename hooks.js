@@ -7,7 +7,7 @@ exports.eejsBlock_editbarMenuLeft = function (hook_name, args, cb) {
   return cb();
 }
 
-exports.eejsBlock_body = function (hook_name, args, cb) {
+exports.eejsBlock_editorContainerBox = function (hook_name, args, cb) {
   args.content = args.content + eejs.require("ep_mathjax/templates/modals.ejs", {}, module);
   return cb();
 }
