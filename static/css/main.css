@@ -6,3 +6,10 @@
   margin-top:-3px;
 }
 
+#mathjaxSrc {
+  width: 100%;
+  margin: 10px 0;
+}
+.ep_mathjax-popup {
+  left: 30px;
+}
