@@ -36,7 +36,7 @@ exports.aceCreateDomLine = function(hook_name, args, cb) {
 	clss.push(cls);
       }
     }
-    var img = "https://latex.codecogs.com/gif.latex?"+unescape(value);
+    var img = window.location.protocol + "//latex.codecogs.com/gif.latex?" + unescape(value);
     return cb([{cls: clss.join(" "), extraOpenTags: "<span class='mathjaxcontainer "+value+"'><span class='mathjax'><img src='" + img + "'></span><span class='character'>", extraCloseTags: '</span></span>'}]);
   }
   return cb();
@@ -53,12 +53,12 @@ exports.postAceInit = function(hook_name, context){
     $inner.on("click", ".mathjax", underscore(exports.editMathjaxClick).bind(ace));
   }, 'mathjax', true);
 
-  // When we write mathjax to the page give it context so ti knows line number  
+  // When we write mathjax to the page give it context so ti knows line number
   $('#doMathjax').click(function(){
     context.ace.callWithAce(function(ace){ // call the function to apply the attribute inside ACE
       ace.ace_setMathjax();
     }, 'mathjax', true); // TODO what's the second attribute do here?
-    padeditor.ace.focus();  
+    padeditor.ace.focus();
   });
 };
 
@@ -67,7 +67,7 @@ exports.editMathjax = function(){
   var lineNumber = clientVars.plugins.plugins.ep_mathjax.lineNumber;
   var latex = this.documentAttributeManager.getAttributeOnLine(lineNumber, 'mathjax');
   latex = unescape(latex.replace(/\&space;/g, ' ').replace(/\&plus;/g, '+').replace(/\&hash;/g, '#').replace(/\@plus;/g, '+').replace(/\@hash;/g, '#'));
-  $("#mathjaxModal").slideDown("fast");
+  $("#mathjaxModal").addClass("popup-show");
   $("#mathjaxSrc").val(latex);
   $('#mathjaxSrc').change();
 }
@@ -92,7 +92,7 @@ exports.setMathjax = function(){
   if(!lineNumber){
     lineNumber = rep.selStart[0];
   }
-  $("#mathjaxModal").slideUp("fast");
+  $("#mathjaxModal").removeClass("popup-show");
 
   var val = $("#mathjaxSrc").val();
   var latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');

@@ -1,16 +1,15 @@
 $(document).ready(function () {
-  $(".ep_mathjax").click(function () {
-console.log("click");
+  $(".ep_mathjax .buttonicon").click(function () {
+
     // Not clicking on an existing latex so no lineNumber
     clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
 
     // bit of a hacky way but works fine
     var module = $("#mathjaxModal");
-
-    if (module.css('display') != "none") {
-      module.slideUp("fast");
+    if (module.hasClass('popup-show')) {
+      $('#mathjaxModal').removeClass('popup-show');
     } else {
-      module.slideDown("fast");
+      $('#mathjaxModal').addClass('popup-show');
       $('#mathjaxSrc').val("");  // clear input
       redraw();
     }
@@ -35,7 +34,7 @@ console.log("click");
   })
 
   $("#cancelMathjax").click(function () {
-    $("#mathjaxModal").slideUp("fast");
+    $('#mathjaxModal').removeClass('popup-show');
   });
 });
 
@@ -45,3 +44,4 @@ function redraw(){
   url = window.location.protocol + "//latex.codecogs.com/gif.latex?" + latex;
   $('#mathjaxPreviewImg').attr("src", url);
 }
+
