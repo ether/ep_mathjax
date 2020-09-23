@@ -1,7 +1,7 @@
 {
   "name": "ep_mathjax",
   "description": "Show LaTeX STylee Math formulas powered by CodeCog NOT Mathjax",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
@@ -11,9 +11,9 @@
   "engines": {
     "node": "*"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "http://github.com/johnmclear/ep_mathjax"
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/johnmclear/ep_mathjax"
   },
   "readmeFilename": "README.md"
 }
