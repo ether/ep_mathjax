@@ -15,5 +15,9 @@
     "type": "git",
     "url": "http://github.com/johnmclear/ep_mathjax"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "funding": {
+    "type": "individual",
+    "url": "http://etherpad.org/"
+  }
 }
