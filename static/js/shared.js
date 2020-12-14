@@ -1,20 +1,21 @@
-var collectContentPre = function (hook, context) {
-  var cls = context.cls;
+'use strict';
+
+const collectContentPre = (hook, context) => {
+  let cls = context.cls;
   const tname = context.tname;
   const state = context.state;
   const lineAttributes = state.lineAttributes;
 
   if (!cls) return; // required for import
 
-  var tagIndex = cls.indexOf('mathjax');
+  const tagIndex = cls.indexOf('mathjax');
   if (tagIndex === 0) {
     //    console.log(context);
-    var cls = cls.split(' ');
+    cls = cls.split(' ');
     //    console.log(cls[1]);
     lineAttributes.mathjax = cls[1];
   }
 
-  var tagIndex = cls.indexOf('mathjax');
   if (tagIndex !== -1) {
     lineAttributes.mathjax = 'mathjax';
   }
@@ -24,9 +25,8 @@ var collectContentPre = function (hook, context) {
   }
 };
 
-var collectContentPost = function (hook, context) {
+const collectContentPost = (hook, context) => {
   const cls = context.cls;
-  const tname = context.tname;
   const state = context.state;
   const lineAttributes = state.lineAttributes;
 

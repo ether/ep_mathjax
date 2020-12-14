@@ -41,13 +41,18 @@ exports.aceCreateDomLine = (hookName, args, cb) => {
       }
     }
     const img = `${window.location.protocol}//latex.codecogs.com/gif.latex?${unescape(value)}`;
+    const firstTags = `<span class='mathjaxcontainer ${value}'>`;
+    const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
+    const thirdTags = '<span class="character">';
+    const extraOpenTags = `${firstTags}${middleTags}${thirdTags}`;
+    const extraCloseTags = '</span></span>';
     return cb(
         [
           {
             cls: clss.join(' '),
-            extraOpenTags: `<span class='mathjaxcontainer ${value}'><span class='mathjax'><img src='${img}'></span><span class='character'>`,
-            extraCloseTags: '</span></span>',
-          }
+            extraOpenTags,
+            extraCloseTags,
+          },
         ]
     );
   }
@@ -56,11 +61,12 @@ exports.aceCreateDomLine = (hookName, args, cb) => {
 
 
 // Listen for click events
-exports.postAceInit = function (hookName, context) {
+exports.postAceInit = (hookName, context) => {
   // Listen for click events of latex images
   context.ace.callWithAce((ace) => {
     const doc = ace.ace_getDocument();
     const $inner = $(doc).find('#innerdocbody');
+
     $inner.on('click', '.mathjax', underscore(exports.editMathjaxClick).bind(ace));
   }, 'mathjax', true);
 
@@ -83,7 +89,9 @@ exports.editMathjax = function () {
       replace(/&hash;/g, '#').
       replace(/@plus;/g, '+').
       replace(/@hash;/g, '#'));
-  $('#mathjaxModal').addClass('popup-show');
+  setTimeout(() => {
+    $('#mathjaxModal').addClass('popup-show');
+  }, 100);
   $('#mathjaxSrc').val(latex);
   $('#mathjaxSrc').change();
 };
