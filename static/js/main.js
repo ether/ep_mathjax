@@ -1,17 +1,19 @@
+'use strict';
+
+const redraw = () => {
+  const val = $('#mathjaxSrc').val();
+  const latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
+  const url = `${window.location.protocol}//latex.codecogs.com/gif.latex?${latex}`;
+  $('#mathjaxPreviewImg').attr('src', url);
+};
+
 $(document).ready(() => {
-  $('.ep_mathjax .buttonicon').click(() => {
+  $('li > .ep_mathjax').click(() => {
     // Not clicking on an existing latex so no lineNumber
     clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
 
-    // bit of a hacky way but works fine
-    const module = $('#mathjaxModal');
-    if (module.hasClass('popup-show')) {
-      $('#mathjaxModal').removeClass('popup-show');
-    } else {
-      $('#mathjaxModal').addClass('popup-show');
-      $('#mathjaxSrc').val(''); // clear input
-      redraw();
-    }
+    $('#mathjaxModal').addClass('popup-show');
+    // redraw();
   });
 
   $('#mathjaxSrc').on('change keyup paste', () => {
@@ -19,14 +21,12 @@ $(document).ready(() => {
   });
 
   $('#mathsymbols').on('change', function () {
-    const val = $(this).val();
     const title = $(this).find('option:selected').attr('title');
     $('#mathjaxSrc').val($('#mathjaxSrc').val() + title);
     $('#mathjaxSrc').change();
   });
 
   $('#greeksymbols').on('change', function () {
-    const val = $(this).val();
     const title = $(this).find('option:selected').attr('title');
     $('#mathjaxSrc').val($('#mathjaxSrc').val() + title);
     $('#mathjaxSrc').change();
@@ -36,10 +36,3 @@ $(document).ready(() => {
     $('#mathjaxModal').removeClass('popup-show');
   });
 });
-
-function redraw() {
-  const val = $('#mathjaxSrc').val();
-  const latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-  url = `${window.location.protocol}//latex.codecogs.com/gif.latex?${latex}`;
-  $('#mathjaxPreviewImg').attr('src', url);
-}
