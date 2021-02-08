@@ -83,12 +83,12 @@ exports.postAceInit = (hookName, context) => {
 exports.editMathjax = function () {
   const lineNumber = clientVars.plugins.plugins.ep_mathjax.lineNumber;
   let latex = this.documentAttributeManager.getAttributeOnLine(lineNumber, 'mathjax');
-  latex = unescape(latex.
-      replace(/&space;/g, ' ').
-      replace(/&plus;/g, '+').
-      replace(/&hash;/g, '#').
-      replace(/@plus;/g, '+').
-      replace(/@hash;/g, '#'));
+  latex = unescape(latex
+      .replace(/&space;/g, ' ')
+      .replace(/&plus;/g, '+')
+      .replace(/&hash;/g, '#')
+      .replace(/@plus;/g, '+')
+      .replace(/@hash;/g, '#'));
   setTimeout(() => {
     $('#mathjaxModal').addClass('popup-show');
   }, 100);
