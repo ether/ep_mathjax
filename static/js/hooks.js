@@ -1,14 +1,13 @@
 'use strict';
 
-const underscore = require('ep_etherpad-lite/static/js/underscore');
 const padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
 let padEditor;
 
 // Bind contexts
 exports.aceInitialized = (hookName, context, cb) => {
   const editorInfo = context.editorInfo;
-  editorInfo.ace_editMathjax = underscore(exports.editMathjax).bind(context);
-  editorInfo.ace_setMathjax = underscore(exports.setMathjax).bind(context);
+  editorInfo.ace_editMathjax = exports.editMathjax.bind(context);
+  editorInfo.ace_setMathjax = exports.setMathjax.bind(context);
   padEditor = context.editorInfo.editor;
 };
 
@@ -67,7 +66,7 @@ exports.postAceInit = (hookName, context) => {
     const doc = ace.ace_getDocument();
     const $inner = $(doc).find('#innerdocbody');
 
-    $inner.on('click', '.mathjax', underscore(exports.editMathjaxClick).bind(ace));
+    $inner.on('click', '.mathjax', exports.editMathjaxClick.bind(ace));
   }, 'mathjax', true);
 
   // When we write mathjax to the page give it context so ti knows line number
