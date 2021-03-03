@@ -4,7 +4,7 @@ const padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
 let padEditor;
 
 // Bind contexts
-exports.aceInitialized = (hookName, context, cb) => {
+exports.aceInitialized = (hookName, context) => {
   const editorInfo = context.editorInfo;
   editorInfo.ace_editMathjax = exports.editMathjax.bind(context);
   editorInfo.ace_setMathjax = exports.setMathjax.bind(context);
@@ -23,6 +23,7 @@ exports.aceAttribsToClasses = (hookName, args, cb) => {
   if (args.key === 'mathjax' && args.value !== '') {
     return cb([`mathjax:${args.value}`]);
   }
+  return cb();
 };
 
 exports.aceCreateDomLine = (hookName, args, cb) => {
