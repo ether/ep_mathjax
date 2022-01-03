@@ -27,10 +27,8 @@ exports.aceAttribsToClasses = (hookName, args, cb) => {
 exports.aceCreateDomLine = (hookName, args, cb) => {
   if (args.cls.indexOf('mathjax:') < 0) return cb();
   const clss = [];
-  const argClss = args.cls.split(' ');
   let value;
-  for (let i = 0; i < argClss.length; i++) {
-    const cls = argClss[i];
+  for (const cls of args.cls.split(' ')) {
     if (cls.indexOf('mathjax:') !== -1) {
       value = cls.substr(cls.indexOf(':') + 1);
     } else {
