@@ -20,43 +20,30 @@ exports.aceInitInnerdocbodyHead = (hookName, args, cb) => {
 
 
 exports.aceAttribsToClasses = (hookName, args, cb) => {
-  if (args.key === 'mathjax' && args.value !== '') {
-    return cb([`mathjax:${args.value}`]);
-  }
-  return cb();
+  if (args.key !== 'mathjax' || args.value === '') return cb();
+  return cb([`mathjax:${args.value}`]);
 };
 
 exports.aceCreateDomLine = (hookName, args, cb) => {
-  if (args.cls.indexOf('mathjax:') >= 0) {
-    const clss = [];
-    const argClss = args.cls.split(' ');
-    let value;
-
-    for (let i = 0; i < argClss.length; i++) {
-      const cls = argClss[i];
-      if (cls.indexOf('mathjax:') !== -1) {
-        value = cls.substr(cls.indexOf(':') + 1);
-      } else {
-        clss.push(cls);
-      }
+  if (args.cls.indexOf('mathjax:') < 0) return cb();
+  const clss = [];
+  const argClss = args.cls.split(' ');
+  let value;
+  for (let i = 0; i < argClss.length; i++) {
+    const cls = argClss[i];
+    if (cls.indexOf('mathjax:') !== -1) {
+      value = cls.substr(cls.indexOf(':') + 1);
+    } else {
+      clss.push(cls);
     }
-    const img = `${window.location.protocol}//latex.codecogs.com/gif.latex?${unescape(value)}`;
-    const firstTags = `<span class='mathjaxcontainer ${value}'>`;
-    const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
-    const thirdTags = '<span class="character">';
-    const extraOpenTags = `${firstTags}${middleTags}${thirdTags}`;
-    const extraCloseTags = '</span></span>';
-    return cb(
-        [
-          {
-            cls: clss.join(' '),
-            extraOpenTags,
-            extraCloseTags,
-          },
-        ]
-    );
   }
-  return cb();
+  const img = `${window.location.protocol}//latex.codecogs.com/gif.latex?${unescape(value)}`;
+  const firstTags = `<span class='mathjaxcontainer ${value}'>`;
+  const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
+  const thirdTags = '<span class="character">';
+  const extraOpenTags = `${firstTags}${middleTags}${thirdTags}`;
+  const extraCloseTags = '</span></span>';
+  return cb([{cls: clss.join(' '), extraOpenTags, extraCloseTags}]);
 };
 
 
