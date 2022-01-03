@@ -25,16 +25,16 @@ exports.aceAttribsToClasses = (hookName, args, cb) => {
 };
 
 exports.aceCreateDomLine = (hookName, args, cb) => {
-  if (!args.cls.includes('mathjax:')) return cb();
   const clss = [];
-  let value;
+  let value = null;
   for (const cls of args.cls.split(' ')) {
-    if (cls.includes('mathjax:')) {
-      value = cls.substr(cls.indexOf(':') + 1);
+    if (cls.startsWith('mathjax:')) {
+      value = cls.slice('mathjax:'.length);
     } else {
       clss.push(cls);
     }
   }
+  if (value == null) return cb();
   const img = `${window.location.protocol}//latex.codecogs.com/gif.latex?${unescape(value)}`;
   const firstTags = `<span class='mathjaxcontainer ${value}'>`;
   const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
