@@ -3,7 +3,7 @@
 const redraw = () => {
   const val = $('#mathjaxSrc').val();
   const latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-  const url = `${window.location.protocol}//latex.codecogs.com/gif.latex?${latex}`;
+  const url = `https://latex.codecogs.com/gif.latex?${latex}`;
   $('#mathjaxPreviewImg').attr('src', url);
 };
 

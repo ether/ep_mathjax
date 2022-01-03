@@ -35,7 +35,7 @@ exports.aceCreateDomLine = (hookName, args, cb) => {
     }
   }
   if (value == null) return cb();
-  const img = `${window.location.protocol}//latex.codecogs.com/gif.latex?${unescape(value)}`;
+  const img = `https://latex.codecogs.com/gif.latex?${unescape(value)}`;
   const firstTags = `<span class='mathjaxcontainer ${value}'>`;
   const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
   const thirdTags = '<span class="character">';
