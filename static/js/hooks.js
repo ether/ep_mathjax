@@ -3,6 +3,28 @@
 const padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
 let padEditor;
 
+/**
+ * Encode a LaTeX string to a mathjax attribute value.
+ */
+const latexToAttrib = (latex) => latex;
+
+/**
+ * Decode a mathjax attribute value to the original LaTeX string.
+ */
+const attribToLatex = (attribValue) => attribValue
+    // This version of the plugin stores the original LaTeX string unmodified as the attribute
+    // value, so normally it is sufficient to simply return the attribute value. However, previous
+    // versions of this plugin (< 2.0) replaced whitespace, '+', and '#' with substitution strings,
+    // so if the mathjax attribute was created by an older version of this plugin then the
+    // substitutions must be reversed. The substitution strings should never appear in an original
+    // LaTeX string, so it should be safe to unconditionally reverse the substitutions (there's no
+    // need to determine whether the attribute was written by an old version of the plugin).
+    .replace(/&space;/g, ' ')
+    .replace(/&plus;/g, '+')
+    .replace(/&hash;/g, '#')
+    .replace(/@plus;/g, '+')
+    .replace(/@hash;/g, '#');
+
 // Bind contexts
 exports.aceInitialized = (hookName, context) => {
   const editorInfo = context.editorInfo;
@@ -21,23 +43,25 @@ exports.aceInitInnerdocbodyHead = (hookName, args, cb) => {
 
 exports.aceAttribsToClasses = (hookName, args, cb) => {
   if (args.key !== 'mathjax' || args.value === '') return cb();
-  return cb([`mathjax:${args.value}`]);
+  return cb([`mathjax:${encodeURIComponent(attribToLatex(args.value))}`]);
 };
 
 exports.aceCreateDomLine = (hookName, args, cb) => {
   const clss = [];
-  let value = null;
+  let latex = null;
   for (const cls of args.cls.split(' ')) {
     if (cls.startsWith('mathjax:')) {
-      value = cls.slice('mathjax:'.length);
+      latex = decodeURIComponent(cls.slice('mathjax:'.length));
     } else {
       clss.push(cls);
     }
   }
-  if (value == null) return cb();
-  const img = `https://latex.codecogs.com/gif.latex?${unescape(value)}`;
+  if (latex == null) return cb();
+  // latex.codecogs.com does NOT use application/x-www-form-urlencoded for the query string. In
+  // particular, a `+` character is interpreted as a plus, not a space.
+  const img = `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex)}`;
   const firstTags = '<span class="mathjaxcontainer">';
-  const middleTags = `<span class='mathjax'><img src='${img}'></span>`;
+  const middleTags = `<span class="mathjax"><img src="${img}"></span>`;
   const thirdTags = '<span class="character">';
   const extraOpenTags = `${firstTags}${middleTags}${thirdTags}`;
   const extraCloseTags = '</span></span>';
@@ -67,13 +91,8 @@ exports.postAceInit = (hookName, context) => {
 // Edit Mathjax -- Get the latex on a line and set the edit box with this value
 exports.editMathjax = function () {
   const lineNumber = clientVars.plugins.plugins.ep_mathjax.lineNumber;
-  let latex = this.documentAttributeManager.getAttributeOnLine(lineNumber, 'mathjax');
-  latex = unescape(latex
-      .replace(/&space;/g, ' ')
-      .replace(/&plus;/g, '+')
-      .replace(/&hash;/g, '#')
-      .replace(/@plus;/g, '+')
-      .replace(/@hash;/g, '#'));
+  const attrib = this.documentAttributeManager.getAttributeOnLine(lineNumber, 'mathjax');
+  const latex = attribToLatex(attrib);
   setTimeout(() => {
     $('#mathjaxModal').addClass('popup-show');
   }, 100);
@@ -102,10 +121,6 @@ exports.setMathjax = function () {
     lineNumber = rep.selStart[0];
   }
   $('#mathjaxModal').removeClass('popup-show');
-
-  const val = $('#mathjaxSrc').val();
-  const latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-
-  const documentAttributeManager = this.documentAttributeManager;
-  documentAttributeManager.setAttributeOnLine(lineNumber, 'mathjax', latex);
+  const value = latexToAttrib($('#mathjaxSrc').val());
+  this.documentAttributeManager.setAttributeOnLine(lineNumber, 'mathjax', value);
 };

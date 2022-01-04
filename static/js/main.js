@@ -1,9 +1,9 @@
 'use strict';
 
 const redraw = () => {
-  const val = $('#mathjaxSrc').val();
-  const latex = val.replace(/\s/g, '&space;').replace(/\+/g, '&plus;').replace(/#/g, '&hash;');
-  const url = `https://latex.codecogs.com/gif.latex?${latex}`;
+  // latex.codecogs.com does NOT use application/x-www-form-urlencoded for the query string. In
+  // particular, a `+` character is interpreted as a plus, not a space.
+  const url = `https://latex.codecogs.com/gif.latex?${encodeURIComponent($('#mathjaxSrc').val())}`;
   $('#mathjaxPreviewImg').attr('src', url);
 };
 
