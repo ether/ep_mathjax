@@ -1,7 +1,7 @@
 {
   "name": "ep_mathjax",
   "description": "Show LaTeX STylee Math formulas powered by CodeCog NOT Mathjax",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "author": {
     "name": "John McLear",
     "email": "john@mclear.co.uk",
