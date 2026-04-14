@@ -1,9 +1,9 @@
-<div class="popup toolbar-popup" id="mathjaxModal">
+<div class="popup toolbar-popup" id="mathjaxModal" role="dialog" aria-labelledby="mathjaxModalTitle">
   <div class="popup-content">
     <% e.begin_block("mathjaxPopup"); %>
 
         <div id="mathjaxWrite">
-            <p><h1>Insert Mathjax into this pad</h1></p>
+            <p><h1 id="mathjaxModalTitle" data-l10n-id="ep_mathjax.modal.title">MathJax Formula</h1></p>
 
                 <select id="mathsymbols" title="General LaTeX symbols">
                   <option title= "">Symbols</option>
@@ -90,8 +90,8 @@
 
             <textarea id="mathjaxSrc" rows="10" cols="60" placeholder="Write Mathjax here"></textarea>
             <div>
-                <input type="button" class="btn btn-primary mathjaxButton" id="doMathjax" value="Insert ">
-                <input type="button" class="btn btn-default mathjaxButton" id="cancelMathjax" value="Cancel">
+                <input type="button" class="btn btn-primary mathjaxButton" id="doMathjax" value="Insert" data-l10n-id="ep_mathjax.modal.insert" data-l10n-attr="value" aria-label="Insert">
+                <input type="button" class="btn btn-default mathjaxButton" id="cancelMathjax" value="Cancel" data-l10n-id="ep_mathjax.modal.cancel" data-l10n-attr="value" aria-label="Cancel">
             </div>
 
         </div>

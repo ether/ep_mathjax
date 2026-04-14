@@ -1,0 +1,6 @@
+{
+  "ep_mathjax.toolbar.title": "Tooltip and aria-label for the MathJax toolbar button",
+  "ep_mathjax.modal.title": "Title of the MathJax formula editor modal",
+  "ep_mathjax.modal.insert": "Label for the insert/submit button in the formula modal",
+  "ep_mathjax.modal.cancel": "Label for the cancel button in the formula modal"
+}
