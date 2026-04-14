@@ -8,7 +8,7 @@ const redraw = () => {
 };
 
 $(document).ready(() => {
-  $('li > .ep_mathjax').click(() => {
+  $('li > .ep_mathjax').on('click', () => {
     // Not clicking on an existing latex so no lineNumber
     clientVars.plugins.plugins.ep_mathjax.lineNumber = false;
 
@@ -32,7 +32,7 @@ $(document).ready(() => {
     $('#mathjaxSrc').change();
   });
 
-  $('#cancelMathjax').click(() => {
+  $('#cancelMathjax').on('click', () => {
     $('#mathjaxModal').removeClass('popup-show');
   });
 });
