@@ -1,14 +1,17 @@
+# ep_mathjax
+
 ![Publish Status](https://github.com/ether/ep_mathjax/workflows/Node.js%20Package/badge.svg) [![Backend Tests Status](https://github.com/ether/ep_mathjax/actions/workflows/test-and-release.yml/badge.svg)](https://github.com/ether/ep_mathjax/actions/workflows/test-and-release.yml)
 
-# Latex formulas in Etherpad powered by CodeCog
+Adds LaTeX math formula rendering to Etherpad, powered by CodeCogs.
 
-![Screen shot](http://i.imgur.com/xeYAiGw.png)
+![Screenshot](http://i.imgur.com/xeYAiGw.png)
 
-Sadly Mathjax was unusable due to an issue that mathjax has to rewrite the contents in the DOM.  So an alternative was found and that's what we use!
+## Install
 
-Enjoy.
+```
+pnpm run plugins i ep_mathjax
+```
 
-TODO:
+## License
 
-* Tests
-* Copy / Paste
+Apache-2.0
