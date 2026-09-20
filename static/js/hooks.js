@@ -1,29 +1,13 @@
 'use strict';
 
 const padeditor = require('ep_etherpad-lite/static/js/pad_editor').padeditor;
+const {attribToLatex, latexToUrl} = require('./shared');
 let padEditor;
 
 /**
  * Encode a LaTeX string to a mathjax attribute value.
  */
 const latexToAttrib = (latex) => latex;
-
-/**
- * Decode a mathjax attribute value to the original LaTeX string.
- */
-const attribToLatex = (attribValue) => attribValue
-    // This version of the plugin stores the original LaTeX string unmodified as the attribute
-    // value, so normally it is sufficient to simply return the attribute value. However, previous
-    // versions of this plugin (< 2.0) replaced whitespace, '+', and '#' with substitution strings,
-    // so if the mathjax attribute was created by an older version of this plugin then the
-    // substitutions must be reversed. The substitution strings should never appear in an original
-    // LaTeX string, so it should be safe to unconditionally reverse the substitutions (there's no
-    // need to determine whether the attribute was written by an old version of the plugin).
-    .replace(/&space;/g, ' ')
-    .replace(/&plus;/g, '+')
-    .replace(/&hash;/g, '#')
-    .replace(/@plus;/g, '+')
-    .replace(/@hash;/g, '#');
 
 // Bind contexts
 exports.aceInitialized = (hookName, context) => {
@@ -57,9 +41,7 @@ exports.aceCreateDomLine = (hookName, args, cb) => {
     }
   }
   if (latex == null) return cb();
-  // latex.codecogs.com does NOT use application/x-www-form-urlencoded for the query string. In
-  // particular, a `+` character is interpreted as a plus, not a space.
-  const img = `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex)}`;
+  const img = latexToUrl(latex);
   const firstTags = '<span class="mathjaxcontainer">';
   const middleTags = `<span class="mathjax"><img src="${img}"></span>`;
   const thirdTags = '<span class="character">';

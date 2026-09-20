@@ -8,7 +8,8 @@
       	"eejsBlock_styles": "ep_mathjax/hooks:eejsBlock_styles",
       	"eejsBlock_editorContainerBox": "ep_mathjax/hooks:eejsBlock_editorContainerBox",
         "collectContentPre": "ep_mathjax/static/js/shared",
-        "collectContentPost": "ep_mathjax/static/js/shared"
+        "collectContentPost": "ep_mathjax/static/js/shared",
+        "getLineHTMLForExport": "ep_mathjax/hooks:getLineHTMLForExport"
       },
       "client_hooks": {
         "aceInitInnerdocbodyHead": "ep_mathjax/static/js/hooks:aceInitInnerdocbodyHead",
