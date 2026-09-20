@@ -26,8 +26,7 @@ const attribToLatex = (attribValue) => String(attribValue == null ? '' : attribV
  * left alone by encodeURIComponent(), but a literal `*` in export HTML is eaten by other plugins
  * that strip the line attribute marker character (ep_align does this).
  */
-const latexToUrl = (latex) =>
-  `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex).replace(/\*/g, '%2A')}`;
+const latexToUrl = (latex) => `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex).replace(/\*/g, '%2A')}`;
 
 /**
  * Escape a LaTeX string for use as an HTML attribute value. `*` is written as a character reference
