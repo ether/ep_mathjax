@@ -6,6 +6,7 @@
       	"eejsBlock_editbarMenuLeft": "ep_mathjax/hooks:eejsBlock_editbarMenuLeft",
       	"eejsBlock_scripts": "ep_mathjax/hooks:eejsBlock_scripts",
       	"eejsBlock_styles": "ep_mathjax/hooks:eejsBlock_styles",
+      	"eejsBlock_timesliderStyles": "ep_mathjax/hooks:eejsBlock_timesliderStyles",
       	"eejsBlock_editorContainerBox": "ep_mathjax/hooks:eejsBlock_editorContainerBox",
         "collectContentPre": "ep_mathjax/static/js/shared",
         "collectContentPost": "ep_mathjax/static/js/shared",

@@ -29,6 +29,15 @@ exports.eejsBlock_styles = (hookName, args, cb) => {
   return cb();
 };
 
+// The timeslider renders pad content with the same markup as the editor, but in its own document
+// rather than in the ACE inner iframe, so the stylesheet added by the aceInitInnerdocbodyHead
+// client hook never reaches it. Without this the line attribute marker character (`*`) is visible
+// next to every formula and the formula itself loses its spacing and background.
+exports.eejsBlock_timesliderStyles = (hookName, args, cb) => {
+  args.content += eejs.require('./templates/timesliderStyles.ejs', {}, module);
+  return cb();
+};
+
 /**
  * Read the `mathjax` line attribute off an attribution line, or null if the line has none.
  */
