@@ -22,9 +22,13 @@ const makeLine = (text, lineAttribs) => {
   return {apool, attribLine};
 };
 
-const exportLine = async (text, lineAttribs) => {
+// Core calls the hook once per line, with `text` set to that line's text (not the pad's) and
+// `lineContent` rendered from `line.text`. For a list line core has already stripped the line
+// attribute marker from `line.text`, so `line.text` and `text` differ there.
+const exportLine = async (text, lineAttribs, lineText = text) => {
   const {apool, attribLine} = makeLine(text, lineAttribs);
-  const context = {line: {text}, lineContent: text, text, apool, attribLine, padId: 'testpad'};
+  const context =
+      {line: {text: lineText}, lineContent: lineText, text, apool, attribLine, padId: 'testpad'};
   await hooks.getLineHTMLForExport('getLineHTMLForExport', context);
   return context.lineContent;
 };
@@ -65,6 +69,23 @@ describe('ep_mathjax getLineHTMLForExport', function () {
     assert.ok(!html.includes('*'));
     assert.ok(html.includes('%2A'));
     assert.ok(html.includes('&#42;'));
+  });
+
+  it('only strips the marker from the line it was called for', async function () {
+    // Core calls the hook once per line. A formula on a later line must still have its own marker
+    // removed, whatever the earlier lines of the pad looked like.
+    const first = await exportLine('Hello world', {});
+    const second = await exportLine('*x', {mathjax: 'x^2'});
+    assert.equal(first, 'Hello world');
+    assert.ok(!second.includes('*'), second);
+    assert.ok(second.endsWith('>x'), second);
+  });
+
+  it('leaves the text alone when core already removed the marker', async function () {
+    // On a list line core strips the marker from line.text before rendering lineContent, so there
+    // is nothing left for us to remove -- and a literal `*` in the user's text must survive.
+    const html = await exportLine('*a * b', {mathjax: 'x^2', list: 'bullet1'}, 'a * b');
+    assert.ok(html.endsWith('a * b'), html);
   });
 
   it('reverses the pre-2.0 attribute value substitutions', async function () {

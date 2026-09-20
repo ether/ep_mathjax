@@ -31,8 +31,8 @@ exports.eejsBlock_styles = (hookName, args, cb) => {
 
 // The timeslider renders pad content with the same markup as the editor, but in its own document
 // rather than in the ACE inner iframe, so the stylesheet added by the aceInitInnerdocbodyHead
-// client hook never reaches it. Without this the line attribute marker character (`*`) is visible
-// next to every formula and the formula itself loses its spacing and background.
+// client hook never reaches it. Without this every formula in the timeslider loses the spacing and
+// the background that `.mathjax` gives it, so it renders squashed against the surrounding text.
 exports.eejsBlock_timesliderStyles = (hookName, args, cb) => {
   args.content += eejs.require('./templates/timesliderStyles.ejs', {}, module);
   return cb();
@@ -65,8 +65,16 @@ exports.getLineHTMLForExport = async (hookName, context) => {
   const latex = mathjaxOnLine(context.attribLine, context.apool);
   if (latex == null) return;
   // Drop the line attribute marker character; it is not part of the document's content.
+  //
+  // The check must be made against the text `lineContent` was rendered from, which is
+  // `context.line.text` and not `context.text`: for a line that is also a list item core has
+  // already removed the marker from `line.text` (and therefore from `lineContent`) while
+  // `context.text` still starts with it, so keying off `context.text` would delete the first
+  // literal `*` of the user's own text instead.
+  const lineText = context.line != null && context.line.text != null
+    ? context.line.text : context.text;
   let lineContent = context.lineContent;
-  if (context.text.indexOf('*') === 0) lineContent = lineContent.replace('*', '');
+  if (lineText.startsWith('*')) lineContent = lineContent.replace('*', '');
   const img =
       `<img src="${escapeAttrib(latexToUrl(latex))}" alt="${escapeAttrib(latex)}">`;
   context.lineContent = `${img}${lineContent}`;
