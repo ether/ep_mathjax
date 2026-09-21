@@ -3,10 +3,11 @@
 /**
  * Decode a mathjax attribute value to the original LaTeX string.
  *
- * This version of the plugin stores the original LaTeX string unmodified as the attribute value, so
- * normally it is sufficient to simply return the attribute value. However, previous versions of this
- * plugin (< 2.0) replaced whitespace, '+', and '#' with substitution strings, so if the mathjax
- * attribute was created by an older version of this plugin then the substitutions must be reversed.
+ * This version of the plugin stores the original LaTeX string unmodified as the attribute value,
+ * so normally it is sufficient to simply return the attribute value. However, previous versions
+ * of this plugin (< 2.0) replaced whitespace, '+', and '#' with substitution strings, so if the
+ * mathjax attribute was created by an older version of this plugin then the substitutions must be
+ * reversed.
  * The substitution strings should never appear in an original LaTeX string, so it should be safe to
  * unconditionally reverse the substitutions (there's no need to determine whether the attribute was
  * written by an old version of the plugin).
@@ -26,8 +27,7 @@ const attribToLatex = (attribValue) => String(attribValue == null ? '' : attribV
  * left alone by encodeURIComponent(), but a literal `*` in export HTML is eaten by other plugins
  * that strip the line attribute marker character (ep_align does this).
  */
-const latexToUrl = (latex) =>
-  `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex).replace(/\*/g, '%2A')}`;
+const latexToUrl = (latex) => `https://latex.codecogs.com/gif.latex?${encodeURIComponent(latex).replace(/\*/g, '%2A')}`;
 
 /**
  * Escape a LaTeX string for use as an HTML attribute value. `*` is written as a character reference

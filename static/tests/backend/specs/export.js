@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 const Changeset = require('ep_etherpad-lite/static/js/Changeset');
-const hooks = require('ep_mathjax/hooks');
+const hooks = require('../../../../hooks');
 
 const AttributePoolModule = require('ep_etherpad-lite/static/js/AttributePool');
 const AttributePool = AttributePoolModule.default || AttributePoolModule;
